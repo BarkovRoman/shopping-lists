@@ -1,13 +1,13 @@
-public class Expenses {
+public class Buyer {
 
     private String name;
     private int expense;
 
     private int id;
 
-    public Expenses(String name, int expense, int id) {
+    public Buyer(String name, int id) {
         this.name = name;
-        this.expense = expense;
+        this.expense = 0;
         this.id = id;
     }
 
@@ -37,7 +37,7 @@ public class Expenses {
 
     @Override
     public String toString() {
-        return "Expenses{" +
+        return "Buyer{" +
                 "name='" + name + '\'' +
                 ", expense=" + expense + '\'' +
                 ", id=" + id +

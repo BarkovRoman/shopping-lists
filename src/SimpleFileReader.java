@@ -13,7 +13,6 @@ public class SimpleFileReader {
         } catch (IOException e) {
             System.out.println("Невозможно прочитать файл. Возможно, файл не находится в нужной директории.");
             return null;
-
         }
     }
 }
