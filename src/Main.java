@@ -16,7 +16,7 @@ public class Main {
                     break;
                 case 2:
                     System.out.println("Выгрузка отчета с транзакциями");
-
+System.out.println(buyersData.buyers);
                     break;
                 case 0:
                     System.out.println("Завершение программы");

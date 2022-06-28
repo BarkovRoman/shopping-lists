@@ -29,14 +29,15 @@ public class BuyersData {    // Данные о покупке
                     Buyer buyer = new Buyer(name, id);
                     buyers.put(name, buyer);
                 } else {
-                    if (parts[j] != null && j != buyerName.getId()) {
+                    if (!parts[j].equals("")  && j != buyerName.getId()) {
+                        if
                         sum += Integer.parseInt(parts[j]);
                     }
                 }
             }
             if (buyerName != null) {
-                sum += buyerName.getExpense();
-                buyerName.setExpense(sum);
+                sum += buyerName.getDebt();
+                buyerName.setDebt(sum);
             }
         }
         System.out.println("Данные о затратах загружены.");
