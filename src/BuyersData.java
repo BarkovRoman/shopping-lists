@@ -24,20 +24,24 @@ public class BuyersData {    // Данные о покупке
             for (int j = 2; j < parts.length; j++) {
                 if (i == 0) {
                     String name = parts[j];
-                    int id = j;
 
-                    Buyer buyer = new Buyer(name, id);
+                    Buyer buyer = new Buyer(name, j);
                     buyers.put(name, buyer);
                 } else {
                     if (!parts[j].equals("")  && j != buyerName.getId()) {
-                        if
                         sum += Integer.parseInt(parts[j]);
+                        for (String key : buyers.keySet()) {
+                            if (buyers.get(key).getId() == j) {
+                                buyers.get(key).setPaid(Integer.parseInt(parts[j]));
+                                //buyers.get(key).setTransaction(Integer.parseInt(parts[j]));
+                            }
+                        }
                     }
                 }
             }
             if (buyerName != null) {
-                sum += buyerName.getDebt();
-                buyerName.setDebt(sum);
+                buyerName.setPurchases(sum);
+                //buyerName.setTransaction(sum * -1);
             }
         }
         System.out.println("Данные о затратах загружены.");

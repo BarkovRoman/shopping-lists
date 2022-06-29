@@ -1,55 +1,71 @@
 public class Buyer {
 
     private String name;
-    private int debt;
+
     private int id;
-    private int spent;
+    private int purchases;    // Покупки
+
+    private int paid;         // Оплатил
+    private int balance;  // Транзакция (оплатил - покупки) если меньше 0 то должен
 
     public Buyer(String name, int id) {
         this.name = name;
-        this.debt = 0;
+        this.purchases = 0;
         this.id = id;
-        this.spent = 0;
+        this.paid = 0;
+        this.balance = 0;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getDebt() {
-        return debt;
+    public int getPurchases() {
+        return purchases;
     }
 
     public int getId() {
         return id;
     }
 
-    public int getSpent() {
-        return spent;
+    public int getPaid() {
+        return paid;
+    }
+
+    public int getBalance() {
+        return balance;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setDebt(int debt) {
-        this.debt = debt;
+    public void setPurchases(int purchases) {
+        this.purchases += purchases;
+        this.balance += purchases;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setSpent(int spent) {
-        this.spent = spent;
+    public void setPaid(int paid) {
+        this.paid += paid;
+        this.balance -= paid;
     }
+
+   /* public void setBalance(int balance) {
+        this.balance += balance;
+    }*/
 
     @Override
     public String toString() {
         return "Buyer{" +
-                "name='" + name + '\'' +
-                ", debt=" + debt + '\'' +
-                ", id=" + id +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", покупки=" + purchases + '\'' +
+                ", оплатил=" + paid + '\'' +
+                ", транзакция=" + balance + '\'' +
                 '}';
     }
 

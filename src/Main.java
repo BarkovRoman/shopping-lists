@@ -6,6 +6,7 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         String patch = "resources" + File.separator + "input.csv";  // путь к файлам с отчетами
         BuyersData buyersData = new BuyersData(patch);
+        Manager manager = new Manager();
 
         while (true) {
             menu();
@@ -16,7 +17,7 @@ public class Main {
                     break;
                 case 2:
                     System.out.println("Выгрузка отчета с транзакциями");
-System.out.println(buyersData.buyers);
+                    manager.calculationDebt(buyersData.buyers);
                     break;
                 case 0:
                     System.out.println("Завершение программы");
