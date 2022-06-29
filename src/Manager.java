@@ -4,18 +4,28 @@ import java.util.Map;
 
 public class Manager {
 
-    List<Buyer> debit = new ArrayList<>();
-    List<Buyer> credit = new ArrayList<>();
+    //List<Buyer> debit = new ArrayList<>();
+    //List<Buyer> credit = new ArrayList<>();
 
     public void calculationDebt(Map<String, Buyer> buyers) {
-        for (Buyer debt : buyers.values()) {
-            if (debt.getBalance() < 0) {
-                credit.add(debt);
-            } else if(debt.getBalance() > 0) {
-                debit.add(debt);
+
+        for (Buyer credit : buyers.values()) {
+            if (credit.getBalance() > 0) {
+                for (Buyer debit : buyers.values()) {
+                    int transaction = 0;
+
+                    if (debit.getBalance() < 0) {
+                        credit.setBalance(debit.getBalance());
+                        if (credit.getBalance() > 0 || credit.getBalance() == 0) {
+                            transaction = debit.getBalance();
+                            debit.setBalance(0);
+                        } else {
+                            credit.setBalance(0);
+                        }
+                        System.out.println(credit.getName() + " --> " + debit.getName() + " " + transaction * -1);
+                    }
+                }
             }
         }
-        System.out.println(debit);
-        System.out.println("Кредитор" + credit);
     }
 }

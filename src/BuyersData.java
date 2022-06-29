@@ -14,7 +14,7 @@ public class BuyersData {    // Данные о покупке
             return;
         }
 
-        String[] lines = content.split("\r\n");
+        String[] lines = content.split("\n");
         for (int i = 0; i < lines.length; i++) {
             String line = lines[i];
             String[] parts = line.split(",");
@@ -33,7 +33,6 @@ public class BuyersData {    // Данные о покупке
                         for (String key : buyers.keySet()) {
                             if (buyers.get(key).getId() == j) {
                                 buyers.get(key).setPaid(Integer.parseInt(parts[j]));
-                                //buyers.get(key).setTransaction(Integer.parseInt(parts[j]));
                             }
                         }
                     }
@@ -41,7 +40,6 @@ public class BuyersData {    // Данные о покупке
             }
             if (buyerName != null) {
                 buyerName.setPurchases(sum);
-                //buyerName.setTransaction(sum * -1);
             }
         }
         System.out.println("Данные о затратах загружены.");

@@ -6,7 +6,7 @@ public class Buyer {
     private int purchases;    // Покупки
 
     private int paid;         // Оплатил
-    private int balance;  // Транзакция (оплатил - покупки) если меньше 0 то должен
+    private int balance;  // Баланс (оплатил - покупки) если меньше 0 то должен
 
     public Buyer(String name, int id) {
         this.name = name;
@@ -54,9 +54,14 @@ public class Buyer {
         this.balance -= paid;
     }
 
-   /* public void setBalance(int balance) {
-        this.balance += balance;
-    }*/
+    public void setBalance(int newBalance) {
+       if (newBalance != 0) {
+           this.balance += newBalance;
+       } else {
+           this.balance = 0;
+       }
+
+    }
 
     @Override
     public String toString() {
@@ -65,7 +70,7 @@ public class Buyer {
                 ", name='" + name + '\'' +
                 ", покупки=" + purchases + '\'' +
                 ", оплатил=" + paid + '\'' +
-                ", транзакция=" + balance + '\'' +
+                ", баланс=" + balance + '\'' +
                 '}';
     }
 
