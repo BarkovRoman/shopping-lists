@@ -1,15 +1,14 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class Manager {
 
-    //List<Buyer> debit = new ArrayList<>();
-    //List<Buyer> credit = new ArrayList<>();
-
-    public void calculationDebt(Map<String, Buyer> buyers) {
-
+    public void calculationDebt(Map<String, Buyer> buyers, String patch) throws IOException {
+        List<String> str = new ArrayList<>();
         for (Buyer credit : buyers.values()) {
+            str.add(credit.getName());
             if (credit.getBalance() > 0) {
                 for (Buyer debit : buyers.values()) {
                     int transaction = 0;
@@ -27,5 +26,7 @@ public class Manager {
                 }
             }
         }
+        RecordToFile.writeTransactionsToFile(patch, str);
+        System.out.println("," + str);
     }
 }

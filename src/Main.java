@@ -1,10 +1,11 @@
 import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner scan = new Scanner(System.in);
-        String patch = "resources" + File.separator + "input.csv";  // путь к файлам с отчетами
+        String patch = "resources" + File.separator;  // путь к файлам с отчетами
         BuyersData buyersData = new BuyersData(patch);
         Manager manager = new Manager();
 
@@ -17,7 +18,7 @@ public class Main {
                     break;
                 case 2:
                     System.out.println("Выгрузка отчета с транзакциями");
-                    manager.calculationDebt(buyersData.buyers);
+                    manager.calculationDebt(buyersData.buyers, patch);
                     break;
                 case 0:
                     System.out.println("Завершение программы");
