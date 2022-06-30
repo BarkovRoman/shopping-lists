@@ -26,3 +26,11 @@ public class RecordToFile {
         System.out.println("Файл создан");
     }
 }
+//Метод записи файла с сайта https://stackoverflow.com/questions/1625234/how-to-append-text-to-an-existing-file-in-java
+    /*private void write(final String s) throws IOException {
+        Files.writeString(
+                Path.of(System.getProperty("java.io.tmpdir"), "filename.txt"),
+                s + System.lineSeparator(),
+                CREATE, APPEND
+        );
+    }*/
