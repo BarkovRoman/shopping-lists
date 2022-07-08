@@ -9,7 +9,7 @@ public class BuyersData {    // Данные о покупке
     Map<String, Buyer> buyers = new HashMap<>(); // Список участников.
 
     public void listOfBuyers() {
-        String patchCsv = patch + "input.csv";
+        String patchCsv = patch + "input2.csv";
         String content = SimpleFileReader.readFileContentsOrNull(patchCsv);
 
         if (content == null) {
