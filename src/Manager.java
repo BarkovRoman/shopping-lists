@@ -6,17 +6,18 @@ import java.util.Map;
 public class Manager {
 
     public void calculationDebt(Map<String, Buyer> buyers, String patch) throws IOException {
-        String strTitle = "";
-        String strContent = "";
+        StringBuilder strTitle = new StringBuilder();
+        StringBuilder strContent = new StringBuilder();
 
         for (Buyer debit : buyers.values()) {
-            strTitle += "," + debit.getName();
-            strContent = debit.getName();
+            strTitle.append(",").append(debit.getName());
+            strContent = new StringBuilder(debit.getName());
             if (debit.getBalance() < 0) {
                 for (Buyer credit : buyers.values()) {
                     int transaction = 0;
-                    if (credit.getBalance() > 0) {
+                    if (credit.getBalance() > 0 && debit.getBalance() != 0) {
                         debit.setBalance(credit.getBalance());
+
                         if (debit.getBalance() < 0 || debit.getBalance() == 0) {
                             transaction = credit.getBalance();
                             credit.setBalance(0);
@@ -29,15 +30,13 @@ public class Manager {
                         System.out.println(credit.getName() + " --> " + debit.getName() + " " + transaction);
                     }
 
-                    String str = "";
                     if (transaction == 0) {
-                        str = ",";
+                        strContent.append(",");
                     } else {
-                        str = "," + String.valueOf(transaction);
+                        strContent.append(",").append(transaction);
                     }
-                    strContent += str;
                 }
-                RecordToFile.writeTransactionsToFile(patch, strContent);
+                RecordToFile.writeTransactionsToFile(patch, strContent.toString());
                 System.out.println(strContent);
             }
         }
