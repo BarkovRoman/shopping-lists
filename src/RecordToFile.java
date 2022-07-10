@@ -21,7 +21,7 @@ public class RecordToFile {
         Files.createFile(path);*/
             Files.writeString(path, str + "\n", CREATE, APPEND);
 
-        System.out.println("Файл создан");
+        //System.out.println("Файл создан");
     }
 }
 /*

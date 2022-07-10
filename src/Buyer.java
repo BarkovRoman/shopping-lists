@@ -1,12 +1,11 @@
 public class Buyer {
 
     private String name;
-
     private int id;
     private int purchases;    // Покупки
 
     private int paid;         // Оплатил
-    private int balance;  // Баланс (оплатил - покупки) если меньше 0 то должен
+    private int balance;      // Баланс (оплатил - покупки) если меньше 0 то должен
 
     public Buyer(String name, int id) {
         this.name = name;

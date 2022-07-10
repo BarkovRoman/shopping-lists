@@ -7,12 +7,17 @@ public class Manager {
 
     public void calculationDebt(Map<String, Buyer> buyers, String patch) throws IOException {
         StringBuilder strTitle = new StringBuilder();
-        StringBuilder strContent = new StringBuilder();
+        StringBuilder strContent;
+
+        for (Buyer title : buyers.values()) {
+            strTitle.append(",").append(title.getName());
+        }
+        RecordToFile.writeTransactionsToFile(patch, strTitle.toString());
 
         for (Buyer debit : buyers.values()) {
-            strTitle.append(",").append(debit.getName());
-            strContent = new StringBuilder(debit.getName());
+            strContent = new StringBuilder("");
             if (debit.getBalance() < 0) {
+                strContent.append(debit.getName());
                 for (Buyer credit : buyers.values()) {
                     int transaction = 0;
                     if (credit.getBalance() > 0 && debit.getBalance() != 0) {
@@ -26,18 +31,16 @@ public class Manager {
                             transaction = credit.getBalance();
                             debit.setBalance(0);
                         }
-
-                        System.out.println(credit.getName() + " --> " + debit.getName() + " " + transaction);
                     }
 
                     if (transaction == 0) {
                         strContent.append(",");
                     } else {
                         strContent.append(",").append(transaction);
+                        System.out.println(credit.getName() + " --> " + debit.getName() + " " + transaction);
                     }
                 }
                 RecordToFile.writeTransactionsToFile(patch, strContent.toString());
-                System.out.println(strContent);
             }
         }
 
