@@ -8,31 +8,42 @@ public class Manager {
     public void calculationDebt(Map<String, Buyer> buyers, String patch) throws IOException {
         String strTitle = "";
         String strContent = "";
-        for (Buyer credit : buyers.values()) {
-            strTitle += "," + credit.getName();
-            strContent = credit.getName();
-            if (credit.getBalance() > 0) {
-                for (Buyer debit : buyers.values()) {
-                    int transaction = 0;
 
-                    if (debit.getBalance() < 0) {
-                        credit.setBalance(debit.getBalance());
-                        if (credit.getBalance() > 0 || credit.getBalance() == 0) {
-                            transaction = debit.getBalance();
-                            debit.setBalance(0);
-                        } else {
-                            debit.setBalance(credit.getBalance());
+        for (Buyer debit : buyers.values()) {
+            strTitle += "," + debit.getName();
+            strContent = debit.getName();
+            if (debit.getBalance() < 0) {
+                for (Buyer credit : buyers.values()) {
+                    int transaction = 0;
+                    if (credit.getBalance() > 0) {
+                        debit.setBalance(credit.getBalance());
+                        if (debit.getBalance() < 0 || debit.getBalance() == 0) {
                             transaction = credit.getBalance();
                             credit.setBalance(0);
+                        } else {
+                            credit.setBalance(debit.getBalance() * -1);
+                            transaction = credit.getBalance();
+                            debit.setBalance(0);
                         }
-                        System.out.println(credit.getName() + " --> " + debit.getName() + " " + transaction * -1);
+
+                        System.out.println(credit.getName() + " --> " + debit.getName() + " " + transaction);
                     }
-                    strContent += "," + transaction;
+
+                    String str = "";
+                    if (transaction == 0) {
+                        str = ",";
+                    } else {
+                        str = "," + String.valueOf(transaction);
+                    }
+                    strContent += str;
                 }
+                RecordToFile.writeTransactionsToFile(patch, strContent);
+                System.out.println(strContent);
             }
         }
 
-        RecordToFile.writeTransactionsToFile(patch, strContent);
+
+
 
     }
 }
