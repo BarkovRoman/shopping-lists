@@ -1,4 +1,4 @@
-public class Buyer {
+public class Buyer implements Comparable<Buyer> {
 
     private String name;
     private int id;
@@ -19,33 +19,17 @@ public class Buyer {
         return name;
     }
 
-    public int getPurchases() {
-        return purchases;
-    }
-
     public int getId() {
         return id;
-    }
-
-    public int getPaid() {
-        return paid;
     }
 
     public int getBalance() {
         return balance;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public void setPurchases(int purchases) {
         this.purchases += purchases;
         this.balance += purchases;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void setPaid(int paid) {
@@ -60,6 +44,10 @@ public class Buyer {
            this.balance = 0;
        }
 
+    }
+    @Override
+    public int compareTo (Buyer o) {
+        return this.balance - o.balance;
     }
 
     @Override

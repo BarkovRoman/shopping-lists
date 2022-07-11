@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -7,12 +8,10 @@ public class Manager {
 
     public void calculationDebt(Map<String, Buyer> buyers, String patch) throws IOException {
         StringBuilder strTitle = new StringBuilder();
-        StringBuilder strContent;
-
-        for (Buyer title : buyers.values()) {
+        StringBuilder strContent = null;
+        /*for (Buyer title : buyersList) {
             strTitle.append(",").append(title.getName());
-        }
-        RecordToFile.writeTransactionsToFile(patch, strTitle.toString());
+        }*/
 
         for (Buyer debit : buyers.values()) {
             strContent = new StringBuilder("");
@@ -40,10 +39,12 @@ public class Manager {
                         System.out.println(credit.getName() + " --> " + debit.getName() + " " + transaction);
                     }
                 }
-                RecordToFile.writeTransactionsToFile(patch, strContent.toString());
+
+                strContent.append("\n");
             }
         }
-
+       String str = strTitle.toString() + "\n" + strContent.toString();
+        RecordToFile.writeTransactionsToFile(patch, str);
 
 
 

@@ -19,7 +19,7 @@ public class RecordToFile {
             Files.delete(path);
         }
         Files.createFile(path);*/
-            Files.writeString(path, str + "\n", CREATE, APPEND);
+            Files.writeString(path, str /*+ "\n", CREATE, APPEND*/);
 
         //System.out.println("Файл создан");
     }

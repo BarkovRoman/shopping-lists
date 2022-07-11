@@ -1,12 +1,24 @@
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class BuyersData {    // Данные о покупке
     String patch;
     public BuyersData(String patch) {
         this.patch = patch;
     }
-    Map<String, Buyer> buyers = new HashMap<>(); // Список участников.
+
+    Comparator<Buyer> buyerComparator = new Comparator<Buyer>() {
+        @Override
+        public int compare(Buyer o1, Buyer o2) {
+            return 0;
+        }
+    };
+
+
+
+    Map<String, Buyer> buyers = new TreeMap<>(Comparator.comparing(o -> o.g)); // Список участников.
 
     public void listOfBuyers() {
         String patchCsv = patch + "input2.csv";
@@ -34,14 +46,14 @@ public class BuyersData {    // Данные о покупке
                         sum += Integer.parseInt(parts[j]);
                         for (String key : buyers.keySet()) {
                             if (buyers.get(key).getId() == j) {
-                                buyers.get(key).setPaid(Integer.parseInt(parts[j]));
+                                buyers.get(key).setPurchases(Integer.parseInt(parts[j]));
                             }
                         }
                     }
                 }
             }
             if (buyerName != null) {
-                buyerName.setPurchases(sum);
+                buyerName.setPaid(sum);
             }
         }
         System.out.println("Данные о затратах загружены.");
