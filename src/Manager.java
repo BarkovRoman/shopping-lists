@@ -1,50 +1,57 @@
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
+
 
 public class Manager {
 
-    public void calculationDebt(Map<String, Buyer> buyers, String patch) throws IOException {
+    public void calculationDebt(List<Buyer> balans, String patch) /*throws IOException*/ {
+
+
         StringBuilder strTitle = new StringBuilder();
-        StringBuilder strContent = null;
-        /*for (Buyer title : buyersList) {
-            strTitle.append(",").append(title.getName());
-        }*/
+        StringBuilder strContent = new StringBuilder();
 
-        for (Buyer debit : buyers.values()) {
-            strContent = new StringBuilder("");
-            if (debit.getBalance() < 0) {
-                strContent.append(debit.getName());
-                for (Buyer credit : buyers.values()) {
+
+        for (Buyer debitor : balans) {
+            strTitle.append(",").append(debitor.getName());
+            int debit = debitor.getBalance();
+
+            if (debit < 0) {
+                strContent.append(debitor.getName());
+
+                for (Buyer creditor : balans) {
                     int transaction = 0;
-                    if (credit.getBalance() > 0 && debit.getBalance() != 0) {
-                        debit.setBalance(credit.getBalance());
+                    int credit = creditor.getBalance();
 
-                        if (debit.getBalance() < 0 || debit.getBalance() == 0) {
-                            transaction = credit.getBalance();
-                            credit.setBalance(0);
+                    if (credit > 0 && debit != 0) {
+                                                        // кредитор 1800, дебитор -1000. -1000 + 1800 = 800. кредитор 800, дебитор 0, транзакция 1000
+                        if (debit * -1 > credit || debit * -1 == credit) {
+                            transaction = credit;
+
+                            creditor.setBalance(0);
+                            debitor.setBalance(credit);
+                            debit += credit;
                         } else {
-                            credit.setBalance(debit.getBalance() * -1);
-                            transaction = credit.getBalance();
-                            debit.setBalance(0);
+                            transaction = debit * -1;
+
+                            creditor.setBalance(debit);
+                            debitor.setBalance(0);
+                            debit = 0;
                         }
                     }
-
                     if (transaction == 0) {
                         strContent.append(",");
                     } else {
                         strContent.append(",").append(transaction);
-                        System.out.println(credit.getName() + " --> " + debit.getName() + " " + transaction);
+                        System.out.println(creditor.getName() + " --> " + debitor.getName() + " " + transaction);
                     }
                 }
-
                 strContent.append("\n");
             }
         }
-       String str = strTitle.toString() + "\n" + strContent.toString();
-        RecordToFile.writeTransactionsToFile(patch, str);
+        System.out.println(strTitle);
+        System.out.println(strContent);
+       /*String str = strTitle.toString() + "\n" + strContent.toString();
+        RecordToFile.writeTransactionsToFile(patch, str);*/
 
 
 

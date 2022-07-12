@@ -1,7 +1,4 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 public class SCVManager {    // Данные о покупке
     String patch;
@@ -12,13 +9,15 @@ public class SCVManager {    // Данные о покупке
 
     Map<String, Buyer> buyers = new HashMap<>(); // Список участников.
     List<String> listOfBuyers = new ArrayList<>();
+    List<Buyer> balans = new ArrayList<>();
+
 
     public void listOfBuyers() {
         String patchCsv = patch;
         String content = FileReader.readFileContentsOrNull(patchCsv);
 
         if (content == null) {
-            return;
+            //return System.out.println();
         }
 
         String[] lines = content.split("\r?\n");
@@ -40,50 +39,17 @@ public class SCVManager {    // Данные о покупке
                 } else {
                     if (!parts[j].equals("")  && id != buyerName.getId()) {
                         debit += Integer.parseInt(parts[j]);
+
+                        buyerName.setBalance(debit * -1);
                         String key = listOfBuyers.get(id);
 
                         buyers.get(key).setBalance(Integer.parseInt(parts[j]));
-
-                        for (String keye : buyers.keySet()) {
-                            if (buyers.get(keye).getId() == j) {
-                                buyers.get(keye).setBalance(Integer.parseInt(parts[j]));
-                            }
-                        }
-
                     }
                 }
             }
-            if (buyerName != null) {
-                buyerName.setBalance(debit);
-            }
-
-
-            /*String line = lines[i];
-            String[] parts = line.split(",");
-            Buyer buyerName = buyers.get(parts[0]);
-            int sum = 0;
-
-            for (int j = 2; j < parts.length; j++) {
-                if (i == 0) {
-                    String name = parts[j];
-
-                    Buyer buyer = new Buyer(name, j);
-                    buyers.put(name, buyer);
-                } else {
-                    if (!parts[j].equals("")  && j != buyerName.getId()) {
-                        sum += Integer.parseInt(parts[j]);
-                        for (String key : buyers.keySet()) {
-                            if (buyers.get(key).getId() == j) {
-                                buyers.get(key).setPurchases(Integer.parseInt(parts[j]));
-                            }
-                        }
-                    }
-                }
-            }*/
-            /*if (buyerName != null) {
-                buyerName.setPaid(sum);
-            }*/
         }
+        balans.addAll(buyers.values());
+        Collections.sort(balans);
         System.out.println("Данные о затратах загружены.");
     }
 }

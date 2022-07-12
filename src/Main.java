@@ -18,7 +18,7 @@ public class Main {
                     break;
                 case 2:
                     System.out.println("Выгрузка отчета с транзакциями");
-                    manager.calculationDebt(scvManager.buyers, patch);
+                    manager.calculationDebt(scvManager.balans, patch);
                     break;
                 case 0:
                     System.out.println("Завершение программы");
