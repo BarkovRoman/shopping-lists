@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws IOException {
         Scanner scan = new Scanner(System.in);
-        String patch = "resources" + File.separator;  // путь к файлам с отчетами
-        BuyersData buyersData = new BuyersData(patch);
+        String patch = "resources" + File.separator + "input2.csv";  // путь к файлам с отчетами
+        SCVManager scvManager = new SCVManager(patch);
         Manager manager = new Manager();
 
         while (true) {
@@ -14,11 +14,11 @@ public class Main {
             switch (scan.nextInt()) {
                 case 1:
                     System.out.println("Загрузка файла с покупками");
-                    buyersData .listOfBuyers();
+                    scvManager.listOfBuyers();
                     break;
                 case 2:
                     System.out.println("Выгрузка отчета с транзакциями");
-                    manager.calculationDebt(buyersData.buyers, patch);
+                    manager.calculationDebt(scvManager.buyers, patch);
                     break;
                 case 0:
                     System.out.println("Завершение программы");

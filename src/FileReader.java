@@ -2,9 +2,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class SimpleFileReader {
+public class FileReader {
 
-    private  SimpleFileReader(){
+    private  FileReader(){
     }
 
     public static String readFileContentsOrNull(String path) {
