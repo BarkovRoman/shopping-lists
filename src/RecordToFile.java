@@ -10,22 +10,13 @@ public class RecordToFile {
     public static void writeTransactionsToFile(String patch, String str) throws IOException {
         Path path = Path.of(patch + "output.csv");
 
-        /*if (Files.exists(path)) {
+        if (Files.exists(path)) {
             System.out.println("Файл с заданным именем уже существует. Будет перезаписан");
             Files.delete(path);
         }
-        Files.createFile(path);*/
+        Files.createFile(path);
             Files.writeString(path, str);
 
-        //System.out.println("Файл создан");
+        System.out.println("Файл создан");
     }
 }
-/*
-//Метод записи файла с сайта https://stackoverflow.com/questions/1625234/how-to-append-text-to-an-existing-file-in-java
-    private void write(final String s) throws IOException {
-        Files.writeString(
-                Path.of(System.getProperty("java.io.tmpdir"), "filename.txt"),
-                s + System.lineSeparator(),
-                CREATE, APPEND
-        );
-    }*/

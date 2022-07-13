@@ -11,7 +11,6 @@ public class SCVManager {    // Данные о покупке
     List<String> listOfBuyers = new ArrayList<>();
     List<Buyer> balans = new ArrayList<>();
 
-
     public void listOfBuyers() {
         String patchCsv = patch + "input2.csv";
         String content = FileReader.readFileContentsOrNull(patchCsv);
@@ -37,7 +36,7 @@ public class SCVManager {    // Данные о покупке
                     buyers.put(name, buyer);
                     listOfBuyers.add(id, name);
                 } else {
-                    if (!parts[j].equals("")  && id != buyerName.getId()) {
+                    if (!parts[j].equals("") && id != buyerName.getId()) {
                         debit = Integer.parseInt(parts[j]);
 
                         buyerName.setBalance(debit * -1);
