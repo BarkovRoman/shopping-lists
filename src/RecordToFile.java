@@ -1,10 +1,6 @@
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
-import static java.nio.file.StandardOpenOption.APPEND;
-import static java.nio.file.StandardOpenOption.CREATE;
 
 public class RecordToFile {
 
@@ -19,7 +15,7 @@ public class RecordToFile {
             Files.delete(path);
         }
         Files.createFile(path);*/
-            Files.writeString(path, str /*+ "\n", CREATE, APPEND*/);
+            Files.writeString(path, str);
 
         //System.out.println("Файл создан");
     }

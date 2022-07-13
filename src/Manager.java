@@ -1,10 +1,9 @@
 import java.io.IOException;
 import java.util.List;
 
-
 public class Manager {
 
-    public void calculationDebt(List<Buyer> balans, String patch) /*throws IOException*/ {
+    public void calculationDebt(List<Buyer> balans, String patch) throws IOException {
 
 
         StringBuilder strTitle = new StringBuilder();
@@ -16,14 +15,13 @@ public class Manager {
             int debit = debitor.getBalance();
 
             if (debit < 0) {
-                strContent.append(debitor.getName());
+                //strContent.append(debitor.getName());
 
                 for (Buyer creditor : balans) {
                     int transaction = 0;
                     int credit = creditor.getBalance();
 
                     if (credit > 0 && debit != 0) {
-                                                        // кредитор 1800, дебитор -1000. -1000 + 1800 = 800. кредитор 800, дебитор 0, транзакция 1000
                         if (debit * -1 > credit || debit * -1 == credit) {
                             transaction = credit;
 
@@ -50,10 +48,8 @@ public class Manager {
         }
         System.out.println(strTitle);
         System.out.println(strContent);
-       /*String str = strTitle.toString() + "\n" + strContent.toString();
-        RecordToFile.writeTransactionsToFile(patch, str);*/
-
-
-
+        String str = strTitle + "\n" + strContent;
+        System.out.println(str);
+        RecordToFile.writeTransactionsToFile(patch, str);
     }
 }

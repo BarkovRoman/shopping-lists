@@ -13,11 +13,11 @@ public class SCVManager {    // Данные о покупке
 
 
     public void listOfBuyers() {
-        String patchCsv = patch;
+        String patchCsv = patch + "input2.csv";
         String content = FileReader.readFileContentsOrNull(patchCsv);
 
         if (content == null) {
-            //return System.out.println();
+            return;
         }
 
         String[] lines = content.split("\r?\n");
@@ -38,7 +38,7 @@ public class SCVManager {    // Данные о покупке
                     listOfBuyers.add(id, name);
                 } else {
                     if (!parts[j].equals("")  && id != buyerName.getId()) {
-                        debit += Integer.parseInt(parts[j]);
+                        debit = Integer.parseInt(parts[j]);
 
                         buyerName.setBalance(debit * -1);
                         String key = listOfBuyers.get(id);
